@@ -1,8 +1,8 @@
 const {gql} = require('apollo-server-express');
-
+//bookId: String!
 const typeDefs = gql`
     type Book {
-        bookId: String!
+        bookId: ID!
         authors: [String]
         description: String!
         title: String!
@@ -35,10 +35,10 @@ const typeDefs = gql`
         saveBook(authors: [String],
             description: String,
             title: String,
-            bookId: String,
+            bookId: ID!,
             image: String,
             link: String): User
-        removeBook(bookId: String): User
+        removeBook(bookId: ID!): User
     }
 `;
     // input SaveBookInput {

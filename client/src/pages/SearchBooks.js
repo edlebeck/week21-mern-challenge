@@ -69,7 +69,7 @@ const SearchBooks = () => {
     }
 
     try {
-      await SAVE_BOOK({
+      await saveBook({
         variables: {
           authors: bookToSave.authors,
           description: bookToSave.description,
@@ -80,9 +80,9 @@ const SearchBooks = () => {
         }
       });
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+      // if (!response.ok) {
+      //   throw new Error('something went wrong!');
+      // }
 
       // if book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
