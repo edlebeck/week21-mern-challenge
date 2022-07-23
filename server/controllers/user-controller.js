@@ -51,7 +51,7 @@ module.exports = {
         { _id: user._id },
         { $addToSet: { savedBooks: body } },
         { new: true, runValidators: true }
-      );
+      );0
       return res.json(updatedUser);
     } catch (err) {
       console.log(err);

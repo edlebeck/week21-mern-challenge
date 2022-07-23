@@ -30,25 +30,25 @@ const resolvers = {
             const token = signToken(user);
             return {token, user};
         },
-        saveBook: async (parent, {input}, context) => {
+        saveBook: async (parent, {authors, description, title, bookId, image, link}, context) => {
             if (context.user) {
-                const userData = await User.findOneAndUpdate(
+                const updatedUser = await User.findOneAndUpdate(
                     {_id: context.user._id},
-                    {$addToSet: {savedBooks: input}},
+                    {$addToSet: { savedBooks: {authors, description, title, bookId, image, link}}},
                     {new: true}
-                );
-                return userData;
+                )
+                return updatedUser;
             }
             throw new AuthenticationError('Something went wrong');
         },
         removeBook: async (parent, {bookId}, context) => {
             if (context.user) {
-                const userData = await User.findOneAndUpdate(
+                const updatedUser = await User.findOneAndUpdate(
                     {_id: context.user._id},
                     {$pull: {savedBooks: {bookId}}},
                     {new: true}
                 );
-                return userData;
+                return updatedUser;
             }
             throw new AuthenticationError('Something went wrong');
         }
